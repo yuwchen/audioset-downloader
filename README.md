@@ -3,15 +3,18 @@
 Download google [AudioSet](https://research.google.com/audioset/)
 
 ### Requriement
-* moviepy
-* pytube
+
+* python
+* [moviepy](https://pypi.org/project/moviepy/)
+* [pytube](https://pypi.org/project/pytube/)
 
 ## Usage
 
 ```
 python download.py /path/to/input /path/to/output/wav /path/to/output/video
 
-example:
+Example:
 python download.py eval_segments.csv ./wav ./video
-
 ```
+
+
