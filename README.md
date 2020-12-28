@@ -11,7 +11,7 @@ Download google [AudioSet](https://research.google.com/audioset/)
 ## Usage
 
 ```
-python download.py /path/to/input_csv --output_wav --output_video --save_video
+python download.py /path/to/input/csv --output_wav_path --output_video_path --save_video
 ```
 
 Example:
