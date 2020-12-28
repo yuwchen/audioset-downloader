@@ -1,6 +1,6 @@
 
-import time
 import os
+import time
 import glob
 import shutil
 from moviepy.editor import *
@@ -43,11 +43,11 @@ f_failed = open("error_message.txt", "a+")
 
 file_dict = {}
 for line in file_info:
-    info = line.split(",")
-    idx = info[0]
-    start = time.strftime('%H:%M:%S', time.gmtime(int(float(info[1]))))
-    end = time.strftime('%H:%M:%S', time.gmtime(int(float(info[2]))))     
-    file_dict[idx] = [start, end] 
+      info = line.split(",")
+      idx = info[0]
+      start = time.strftime('%H:%M:%S', time.gmtime(int(float(info[1]))))
+      end = time.strftime('%H:%M:%S', time.gmtime(int(float(info[2]))))     
+      file_dict[idx] = [start, end] 
 
 exist_wav = get_test_path(output_path)
 for wav in exist_wav:
@@ -59,22 +59,22 @@ for line in failed:
       file_dict.pop(wav, None)
 
 for key, value in file_dict.items():
-    idx = key
-    start = file_dict[key][0]
-    end = file_dict[key][1]
-    print("processing:",idx)
-    try:
-      yt = YouTube('https://youtu.be/'+idx).streams.first().download(os.path.join(video_output,idx))
-      video_path = glob.glob(os.path.join(video_output,idx,"*.mp4"))[0]
-      sound = AudioFileClip(video_path)
-      newsound = sound.subclip(start, end)   
-      newsound.write_audiofile(os.path.join(output_path,idx+".wav"))
-      if args.save_video=='False':
-            shutil.rmtree(os.path.join(video_output,idx))
-      print("processing OK:", idx)
-    except Exception as e:
-      print("processing Fail:", e, idx)
-      f_failed.write(idx+"#"+str(e)+'\n')
+      idx = key
+      start = file_dict[key][0]
+      end = file_dict[key][1]
+      print("processing:",idx)
+      try:
+            yt = YouTube('https://youtu.be/'+idx).streams.first().download(os.path.join(video_output,idx))
+            video_path = glob.glob(os.path.join(video_output,idx,"*.mp4"))[0]
+            sound = AudioFileClip(video_path)
+            newsound = sound.subclip(start, end)   
+            newsound.write_audiofile(os.path.join(output_path,idx+".wav"))
+            if args.save_video=='False':
+                  shutil.rmtree(os.path.join(video_output,idx))
+            print("processing OK:", idx)
+      except Exception as e:
+            print("processing Fail:", e, idx)
+            f_failed.write(idx+"#"+str(e)+'\n')
 
 if args.save_video=='False':
       shutil.rmtree(os.path.join(video_output))
