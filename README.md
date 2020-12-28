@@ -12,11 +12,16 @@ Download google [AudioSet](https://research.google.com/audioset/)
 
 ```
 python download.py /path/to/input --output_wav --output_video --save_video
+```
 
 Example:
+```
 python download.py eval_segments.csv ./wav ./video False
+```
 or
+```
 python download.py eval_segments.csv
 ```
+
 
 
