@@ -39,8 +39,6 @@ video_output = args.output_video
 create_dir(output_path)
 create_dir(video_output)
 
-f_failed = open("error_message.txt", "a+")
-
 file_dict = {}
 for line in file_info:
       info = line.split(",")
@@ -53,10 +51,16 @@ exist_wav = get_test_path(output_path)
 for wav in exist_wav:
       file_dict.pop(wav, None)
 
-failed = list(f_failed.readlines())
-for line in failed:
-      wav = line.split("#")[0]
-      file_dict.pop(wav, None)
+if os.path.isfile("error_message.txt"):
+      f_failed = open("error_message.txt","r")
+      failed = list(f_failed.readlines())
+      for line in failed:
+            wav = line.split("#")[0]
+            file_dict.pop(wav, None)
+      f_failed.close()
+      f_failed = open("error_message.txt","a+")
+else:
+      f_failed = open("error_message.txt","w+")
 
 for key, value in file_dict.items():
       idx = key
